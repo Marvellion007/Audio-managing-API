@@ -71,6 +71,8 @@ It contains the build related things
 
 # CURL requests for the api:
 
+Date format should be of type "%Y-%m-%d %H:%M:%S"
+
 # CREATE:
 curl -X POST "http://127.0.0.1:{PORT}/%22${audioFileType}%22" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{}"
 

@@ -28,14 +28,14 @@ def create_message(audioFileType: str, audioFileMetadata: dict, db: Session = De
         date_format = "%Y-%m-%d %H:%M:%S"
         given = datetime.strptime(given_date, date_format)
         now =  datetime.now()
-        if audioFileType.lower()=='"song"':
+        if audioFileType.lower()=='"song"' or audioFileType.lower()=="song":
             if len(audioFileMetadata["NAME"])>100:
                 raise HTTPException(status_code=400, detail="Name length exeeded")
             if audioFileMetadata["DURATION"]<0:
                 raise HTTPException(status_code=400, detail="duration cannot be negetive")
             if given<now:
                 raise HTTPException(status_code=400, detail="date cannot be in past")  
-        if audioFileType.lower()=='"podcast"':
+        if audioFileType.lower()=='"podcast"' or audioFileType.lower()=="podcast":
             if len(audioFileMetadata["NAME"])>100:
                 raise HTTPException(status_code=400, detail="Name length exeeded")
             if audioFileMetadata["DURATION"]<0:
@@ -49,7 +49,9 @@ def create_message(audioFileType: str, audioFileMetadata: dict, db: Session = De
             if audioFileMetadata["PARTICIPANTS"]:
                 if not isinstance(audioFileMetadata["PARTICIPANTS"], list):
                     raise HTTPException(status_code=400, detail="participants should be of list type")
-        if audioFileType.lower()=='"audiobook"':
+                if len(audioFileMetadata["PARTICIPANTS"])>10:
+                    raise HTTPException(status_code=400, detail="participants length exceeded")
+        if audioFileType.lower()=='"audiobook"' or audioFileType.lower()=="audiobook":
             if len(audioFileMetadata["TITLE"])>100:
                 raise HTTPException(status_code=400, detail="Title length exeeded")
             if len(audioFileMetadata["AUTHOR"])>100:
@@ -83,14 +85,14 @@ def update_message(audioFileType: str, audioFileMetadata: dict, db: Session = De
     date_format = "%Y-%m-%d %H:%M:%S"
     given = datetime.strptime(given_date, date_format)
     now =  datetime.now()
-    if audioFileType.lower()=='"song"':
+    if audioFileType.lower()=='"song"' or audioFileType.lower()=="song":
         if len(audioFileMetadata["NAME"])>100:
             raise HTTPException(status_code=400, detail="Name length exeeded")
         if audioFileMetadata["DURATION"]<0:
             raise HTTPException(status_code=400, detail="duration cannot be negetive")
         if given<now:
             raise HTTPException(status_code=400, detail="date cannot be in past")  
-    if audioFileType.lower()=='"podcast"':
+    if audioFileType.lower()=='"podcast"' or audioFileType.lower()=="podcast":
         if len(audioFileMetadata["NAME"])>100:
             raise HTTPException(status_code=400, detail="Name length exeeded")
         if audioFileMetadata["DURATION"]<0:
@@ -104,7 +106,9 @@ def update_message(audioFileType: str, audioFileMetadata: dict, db: Session = De
         if audioFileMetadata["PARTICIPANTS"]:
             if not isinstance(audioFileMetadata["PARTICIPANTS"], list):
                 raise HTTPException(status_code=400, detail="participants should be of list type")
-    if audioFileType.lower()=='"audiobook"':
+            if len(audioFileMetadata["PARTICIPANTS"])>10:
+                    raise HTTPException(status_code=400, detail="participants length exceeded")
+    if audioFileType.lower()=='"audiobook"' or audioFileType.lower()=="audiobook":
         if len(audioFileMetadata["TITLE"])>100:
             raise HTTPException(status_code=400, detail="Title length exeeded")
         if len(audioFileMetadata["AUTHOR"])>100:

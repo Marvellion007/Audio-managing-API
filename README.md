@@ -108,6 +108,15 @@ curl -X PATCH "http://127.0.0.1:{PORT}/{audioFileType}/{audioFileID}" -H  "accep
 #GET request for audiobook:
 - curl -X GET "http://127.0.0.1:8000/audioBook/1" -H  "accept: application/json"
 
+#list request for song:
+- curl -X GET "http://127.0.0.1:8000/song" -H  "accept: application/json"
+
+#list request for podcast:
+- curl -X GET "http://127.0.0.1:8000/podcast" -H  "accept: application/json"
+
+#list request for audiobook:
+- curl -X GET "http://127.0.0.1:8000/audioBook" -H  "accept: application/json"
+
 #DELETE request for song:
 - curl -X DELETE "http://127.0.0.1:8000/song/1" -H  "accept: application/json"
 
@@ -128,4 +137,5 @@ curl -X PATCH "http://127.0.0.1:{PORT}/{audioFileType}/{audioFileID}" -H  "accep
 #PATCH request for audiobook:
 - curl -X PATCH "http://127.0.0.1:8000/audiobook/1" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"ID\":1,\"TITLE\":\"fallen audiobook\",\"AUTHOR\":\"A author\",\"NARRATOR\":\"A Narrator\",\"DURATION\":4563,\"UPLOAD_TIME\":\"2021-02-22 03:35:05\"}"
  
+
 

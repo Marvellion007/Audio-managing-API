@@ -20,7 +20,7 @@ def get_db():
         db.close()        
 
 @router.post("/{audioFileType}")
-def create_message(audioFileType: str, audioFileMetadata: dict, db: Session = Depends(get_db)):
+def create_entry(audioFileType: str, audioFileMetadata: dict, db: Session = Depends(get_db)):
     Message_obj = base.createbase(audioFileType = audioFileType, audioFileMetadata = audioFileMetadata )
     result = message.get_message(db,audioFileType=audioFileType, audioFileID=audioFileMetadata["ID"]) 
     if result is None:
@@ -68,15 +68,21 @@ def create_message(audioFileType: str, audioFileMetadata: dict, db: Session = De
         raise HTTPException(status_code=400, detail="id already there")
 
 @router.get("/{audioFileType}/{audioFileID}")
-def read_message(audioFileType: str, audioFileID: int, db: Session = Depends(get_db)) :
+def read_entry(audioFileType: str, audioFileID: int, db: Session = Depends(get_db)) :
     result = message.get_message(db,audioFileType=audioFileType, audioFileID=audioFileID)
     if result is None:
         raise HTTPException(status_code=400, detail="id not found")
-    print(result)
+    return result
+
+@router.get("/{audioFileType}")
+def list_entry(audioFileType: str, db: Session = Depends(get_db)) :
+    result = message.list_message(db, audioFileType=audioFileType)
+    if result is None:
+        raise HTTPException(status_code=400, detail="id not found")
     return result
 
 @router.patch("/{audioFileType}/{audioFileID}")
-def update_message(audioFileType: str, audioFileMetadata: dict, db: Session = Depends(get_db)):
+def update_entry(audioFileType: str, audioFileMetadata: dict, db: Session = Depends(get_db)):
     Message_obj = base.createbase(audioFileType = audioFileType, audioFileMetadata = audioFileMetadata )
     result = message.get_message(db,audioFileType=audioFileType, audioFileID=audioFileMetadata["ID"])
     if result is None:
@@ -123,7 +129,7 @@ def update_message(audioFileType: str, audioFileMetadata: dict, db: Session = De
     return result  
 
 @router.delete("/{audioFileType}/{audioFileID}")
-def delete_message(audioFileType: str, audioFileID: int, db: Session = Depends(get_db))-> str:
+def delete_entry(audioFileType: str, audioFileID: int, db: Session = Depends(get_db))-> str:
     result = message.get_message(db,audioFileType=audioFileType, audioFileID=audioFileID)
     if result is None:
         raise HTTPException(status_code=400, detail="id not found")

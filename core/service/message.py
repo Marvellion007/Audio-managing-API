@@ -8,7 +8,9 @@ a=message.SessionLocal()
 
 def get_message(db: message.Session, audioFileType:str, audioFileID: int):
     return message.get_message(db, audioFileType, audioFileID)
-    
+
+def list_message(db: message.Session, audioFileType:str):
+    return message.list_message(db, audioFileType)
 
 def create_message(db: message.Session, message_obj: base.createbase):
     return message.create_message(db, message_obj)

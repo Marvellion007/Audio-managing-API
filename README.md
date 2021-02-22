@@ -43,10 +43,10 @@ make build ENV=qa
 make run ENV=qa
 
 4: you can open the link
-http://127.0.0.1:filename/docs
+http://127.0.0.1:{port}/docs
 for interactive Fastapi
      or 
-http://127.0.0.1:filename/redoc 
+http://127.0.0.1:{port}/redoc 
 for alternate interactive api
 
 

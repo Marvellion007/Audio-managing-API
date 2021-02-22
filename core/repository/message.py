@@ -50,6 +50,34 @@ def get_message(db: Session, audioFileType:str, audioFileID: int):
             return {"ID": audioFileID,"TITLE": obj.TITLE, "AUTHOR": obj.AUTHOR,"UPLOAD_TIME": obj.UPLOAD_TIME, "NARRATOR": obj.NARRATOR, "DURATION": obj.DURATION}
         else: 
             return None
+def list_message(db: Session, audioFileType:str):
+    if audioFileType.lower()=="song" or audioFileType.lower()=='"song"' :
+        obj= db.query(table.Song).all()
+        l=[]
+        if obj is not None:
+            for i in obj:
+                l.append({"ID": i.ID ,"NAME": i.NAME, "DURATION": i.DURATION,"UPLOAD_TIME": i.UPLOAD_TIME})
+            return l
+        else:
+            return None
+    if audioFileType.lower()=="podcast" or audioFileType.lower()=='"podcast"' :
+        obj= db.query(table.Podcast).all()
+        l=[]
+        if obj is not None:
+            for i in obj:
+                l.append({"ID": i.ID,"NAME": i.NAME, "DURATION": i.DURATION,"UPLOAD_TIME": i.UPLOAD_TIME, "HOST": i.HOST, "PARTICIPANTS": i.PARTICIPANTS})
+            return l
+        else: 
+            return None
+    if audioFileType.lower()=="audiobook" or audioFileType.lower()=='"audiobook"' :
+        obj= db.query(table.Audiobook).all()
+        l=[]
+        if obj is not None:
+            for i in obj:
+                l.append({"ID": i.ID,"TITLE": i.TITLE, "AUTHOR": i.AUTHOR,"UPLOAD_TIME": i.UPLOAD_TIME, "NARRATOR": i.NARRATOR, "DURATION": i.DURATION})
+            return l
+        else: 
+            return None
 
 def create_message(db: Session, message: base.createbase):
     db_message=""

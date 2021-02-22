@@ -1,11 +1,33 @@
 # INTODUCTION 
 This is a CRUD api for managing audiofiles.
-there are 3 types of file namely:
--Song
--Podcast
--Audiobook
 The api is dockerized using docker compose.
 
+Audio file type can be one of the following:
+1-Song
+2-Podcast
+3-Audiobook
+
+# Song file fields:
+- ID - (mandatory, integer, unique)
+- Name of the song - (mandatory, string, cannot be larger than 100 characters)
+- Duration in number of seconds (mandatory, integer, positive) 
+- Uploaded time - (mandatory, Datetime, cannot be in the past)
+
+# Podcast file fields:
+- ID - (mandatory, integer, unique)
+- Name of the podcast - (mandatory, string, cannot be larger than 100 characters)
+- Duration in number of seconds (mandatory, integer, positive) 
+- Uploaded time - (mandatory, Datetime, cannot be in the past)
+- Host - (mandatory, string, cannot be larger than 100 characters)
+- Participants - (optional, list of strings, each string cannot be larger than 100 characters, maximum of 10 participants possible)
+
+# Audiobook file fields:
+- ID - (mandatory, integer, unique)
+- Title of the audiobook - (mandatory, string, cannot be larger than 100 characters)
+- Author of the title (mandatory, string, cannot be larger than 100 characters)
+- Narrator (mandatory, string, cannot be larger than 100 characters) 
+- Duration in number of seconds - (mandatory, integer, positive)
+- Uploaded time - (mandatory, Datetime, cannot be in the past)
 
 # HOW TO RUN
 In the config directory there are 3 files with different port numbers.

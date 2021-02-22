@@ -23,7 +23,7 @@ def get_db():
 def create_message(audioFileType: str, audioFileMetadata: dict, db: Session = Depends(get_db)):
     Message_obj = base.createbase(audioFileType = audioFileType, audioFileMetadata = audioFileMetadata )
     result = message.get_message(db,audioFileType=audioFileType, audioFileID=audioFileMetadata["ID"]) 
-    if result is not None:
+    if result is None:
         given_date = audioFileMetadata["UPLOAD_TIME"]
         date_format = "%Y-%m-%d %H:%M:%S"
         given = datetime.strptime(given_date, date_format)
